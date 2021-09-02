@@ -6,7 +6,7 @@ TAG=ubuntu.21.04
 # Build the docker image.
 .PHONY: build
 build:
-	sudo time docker build --tag $(IMAGE_NAME):$(TAG) .
+	sudo docker build --tag $(IMAGE_NAME):$(TAG) .
 
 
 # Run the image in the background.
