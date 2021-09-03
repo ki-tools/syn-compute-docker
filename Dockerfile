@@ -58,3 +58,6 @@ RUN pip3 install synapse-uploader
 RUN apt-get install -y libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh && bash Anaconda3-2021.05-Linux-x86_64.sh -b && rm Anaconda3-2021.05-Linux-x86_64.sh
 RUN echo 'PATH="$PATH:$HOME/anaconda3/bin"' >> ~/.bashrc
+
+# Install openssh-server for VSCode Remote-SSH
+RUN apt-get install -y openssh-server
