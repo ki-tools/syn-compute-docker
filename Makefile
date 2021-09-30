@@ -1,7 +1,7 @@
 SYN_PROJECT_ID=syn26232086
 CONTAINER_NAME=ki-compute
 IMAGE_NAME=docker.synapse.org/$(SYN_PROJECT_ID)/$(CONTAINER_NAME)
-VOLUME_NAME=$(CONTAINER_NAME)-data
+VOLUME_NAME=$(CONTAINER_NAME)-home-root
 
 # Build the docker image.
 .PHONY: build
@@ -12,19 +12,19 @@ build:
 # Run the image in the background.
 .PHONY: run
 run:
-	sudo docker run --tty --detach --volume $(CONTAINER_NAME)-data:/data --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	sudo docker run --tty --detach --volume $(VOLUME_NAME):/root --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 
 # Run the image in the background with SSH port forwarding.
 .PHONY: run-ssh
 run-ssh:
-	sudo docker run --tty --detach --volume $(VOLUME_NAME):/data -p 2222:22 --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	sudo docker run --tty --detach --volume $(VOLUME_NAME):/root -p 2222:22 --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 
 # Connect to the container with a shell.
 .PHONY: connect
 connect:
-	sudo docker exec -it $(CONTAINER_NAME) /bin/bash
+	sudo docker exec --interactive --tty --workdir /root $(CONTAINER_NAME) /bin/bash
 
 
 # List volumes.
@@ -77,6 +77,7 @@ rm_container:
 # Pull the image from Synapse.
 .PHONY: pull
 pull:
+	sudo docker login docker.synapse.org
 	sudo docker pull $(IMAGE_NAME)
 
 
