@@ -1,9 +1,21 @@
 # Synapse Ki Compute Docker Image
 
-## Usage
+## Image Location
+- [https://www.synapse.org/#!Synapse:syn26232086/docker]([https://www.synapse.org/#!Synapse:syn26232086/docker)
+
+## Sage Compute Environment Usage
+
+- SSH into your EC2 compute instance.
+- Clone the repo so you can use the Make commands and scripts: `git clone https://github.com/ki-tools/syn-compute-docker.git`
+- Go into the repo directory: `cd syn-compute-docker`
+- Pull the docker image from Synapse: `make pull`
+- Start and run the container: `make run`
+- Connect to a shell in the running container: `make connect`
+
+## Dev Usage
 
 - Build the docker image: `make build`
-- Start the container: `make start`
+- Start the container: `make run`
 - Connect to the container: `make connect`
 - Stop the container: `make stop`
 

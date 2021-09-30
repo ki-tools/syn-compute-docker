@@ -61,3 +61,7 @@ RUN echo 'PATH="$PATH:$HOME/anaconda3/bin"' >> ~/.bashrc
 
 # Install openssh-server for VSCode Remote-SSH
 RUN apt-get install -y openssh-server
+RUN mkdir ~/.ssh
+RUN chmod 700 ~/.ssh
+RUN touch ~/.ssh/authorized_keys
+RUN chmod 600 ~/.ssh/authorized_keys
