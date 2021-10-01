@@ -9,15 +9,9 @@ build:
 	sudo docker build --tag $(IMAGE_NAME) --tag $(CONTAINER_NAME) .
 
 
-# Run the image in the background.
+# Run the image in the background (with SSH port forwarding).
 .PHONY: run
 run:
-	sudo docker run --tty --detach --volume $(VOLUME_NAME):/root --name $(CONTAINER_NAME) $(IMAGE_NAME)
-
-
-# Run the image in the background with SSH port forwarding.
-.PHONY: run-ssh
-run-ssh:
 	sudo docker run --tty --detach --volume $(VOLUME_NAME):/root -p 2222:22 --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 

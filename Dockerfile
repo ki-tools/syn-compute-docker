@@ -65,3 +65,6 @@ RUN mkdir ~/.ssh
 RUN chmod 700 ~/.ssh
 RUN touch ~/.ssh/authorized_keys
 RUN chmod 600 ~/.ssh/authorized_keys
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+ENTRYPOINT service ssh restart
