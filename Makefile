@@ -80,3 +80,9 @@ pull:
 push: build
 	sudo docker login docker.synapse.org
 	sudo docker push $(IMAGE_NAME)
+
+
+# Install and configure the base packages for the Notebook instance
+.PHONY: install_notebook
+install_notebook:
+	./install.sh
