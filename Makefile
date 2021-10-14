@@ -85,4 +85,4 @@ push: build
 # Install and configure the base packages for the Notebook instance
 .PHONY: install_notebook
 install_notebook:
-	./install.sh
+	./notebook_install.sh

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Waits for the system apt daily checks to complete.
-# This only happens the first time the instances is created/started and certain times per day.
+# This happens the first time the instance is created/started and certain times per day.
 while [[ $(ps aux | grep "root" | grep -i "apt") ]]
 do
   echo "`date` Waiting for system apt processes to finish..."
