@@ -82,7 +82,13 @@ push: build
 	sudo docker push $(IMAGE_NAME)
 
 
-# Install and configure the base packages for the Notebook instance
+# Install and configure the base packages for the Notebook instance.
 .PHONY: install_notebook
 install_notebook:
-	./notebook_install.sh
+	./notebook_install.sh 2>&1 | tee notebook_install.log
+
+
+# Install and configure R for the Notebook instance.
+.PHONY: install_notebook_r
+install_notebook_r:
+	./notebook_install_r.sh 2>&1 | tee notebook_install_r.log

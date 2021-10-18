@@ -11,6 +11,7 @@
 - Clone the repo so you can use the Make commands and scripts: `git clone https://github.com/ki-tools/syn-compute-docker.git`
 - Go into the repo directory: `cd syn-compute-docker`
 - Install and configure the base packages: `make install_notebook`
+  - (Optional) Install and configure R 4.x: `make install_notebook_r`
 
 ### Docker
 - SSH into your EC2 compute instance.

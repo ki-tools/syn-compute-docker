@@ -59,55 +59,13 @@ execOrExit sudo apt-get upgrade -y
 
 installAptPackages apt-utils curl git wget awscli vim
 
-# Install random dependencies for R and R packages etc.
-installAptPackages gnupg2 gnupg libfreetype6-dev dirmngr apt-transport-https ca-certificates software-properties-common libxml2-dev libcurl4-openssl-dev libssl-dev cmake
-
-# Install two helper packages we need
-execOrExit sudo apt-get install --no-install-recommends software-properties-common dirmngr
-
-# Add the signing key (by Michael Rutter) for these repos
-# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-# Fingerprint: 298A3A825C0D65DFD57CBB651716619E084DAB9
-wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-
-# Add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
-execOrExit sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
-
-# Upgrade R
-execOrExit rm -rf ~/R
-installAptPackages r-base
-installAptPackages build-essential
-execOrExit sudo Rscript -e 'update.packages(ask=FALSE, checkBuilt=TRUE)'
-
 # Install pip and radian (nicer R terminal)
 installAptPackages python3-venv python3-pip
 execOrExit python -m pip install -U pip
 installPipPackage -U radian
 
 # Create alias 'r' that runs the radian R terminal
-echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc
 echo 'alias r="radian"' >> ~/.bashrc
-
-# Re-Install packages for R 4.x -- TODO: This might not be working completely.
-execOrExit sudo Rscript -e 'install.packages("codetools", repos = "https://cloud.r-project.org")'
-execOrExit sudo Rscript -e 'install.packages("colorspace", repos = "https://cloud.r-project.org")'
-execOrExit sudo Rscript -e 'install.packages("munsell", repos = "https://cloud.r-project.org")'
-execOrExit sudo Rscript -e 'install.packages("scales", repos = "https://cloud.r-project.org")'
-execOrExit sudo Rscript -e 'install.packages("Rcpp", repos = "https://cloud.r-project.org")'
-execOrExit sudo Rscript -e 'install.packages("pkgload", repos = "https://cloud.r-project.org")'
-execOrExit sudo Rscript -e 'install.packages("ggplot2", repos = "https://cloud.r-project.org")'
-
-# Install tidyverses
-execOrExit sudo Rscript -e 'install.packages("tidyverse", repos = "https://cloud.r-project.org")'
-execOrExit sudo Rscript -e 'Sys.setenv(ARROW_S3 ="ON"); install.packages("arrow", repos = "https://cloud.r-project.org")'
-
-R --version
-
-# Install synapser R package
-execOrExit sudo Rscript -e 'install.packages("synapser", repos=c("http://ran.synapse.org", "http://cran.fhcrc.org"))'
-
-# Install reticulate
-execOrExit sudo Rscript -e 'install.packages("reticulate", repos = "https://cloud.r-project.org")'
 
 # Install python packages
 installPipPackage Cython
